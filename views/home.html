@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery Price</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+</head>
+
+<body>
+    <!-- <h1> May Node and Express be with you. </h1> -->
+    <div class="col-xs-6" style="padding-top: 10px;">
+        <form class="col-xs-12" id="createTokenForm">
+            <label for="admintype">Choose admin type:</label>
+            <select id="admintype" name="admintype">
+                <option value="1">Admin 1</option>
+                <option value="2">Admin 2</option>
+                <option value="3">Admin 3</option>
+            </select>
+            <button type="submit">Create Token</button>
+        </form>
+        <p class="col-xs-12">Please copy below token</p>
+        <textarea id="displayToken" class="col-xs-12"></textarea>
+    </div>
+    <div class="col-xs-12" style="padding-top: 50px;">
+        <h1>Delivery Price Model</h1>
+    </div>
+    <div class="col-xs-12">
+        <div class="col-xs-12" style="padding: 5px; border-style: solid; margin-top: 10px;">
+            <!-- Start Create -->
+            <div class="col-xs-6">
+                <h4>Create</h4>
+                <form id="createDeliveryPriceForm">
+                    <div class="col-xs-12">
+                        <label class="col-xs-6" for="producttype">Choose product type:</label>
+                        <select class="col-xs-6" id="producttype" name="producttype">
+                            <option value="cold_chain">Cold Chain</option>
+                            <option value="standard">Standard</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="col-xs-6" for="deliveryDay">Choose delivery day:</label>
+                        <select class="col-xs-6" id="deliveryDay" name="deliveryDay">
+                            <option value="same_day">Same Day</option>
+                            <option value="next_day">Next Day</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="col-xs-6">Description</label>
+                        <p class="col-xs-6" style="padding: 0px;" id="textDescription"></p>
+                        <input id="nameDescription" class="col-xs-6" type="text" placeholder="" name="nameDescription"
+                            style="display: none;">
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="col-xs-6">Default Price</label>
+                        <input class="col-xs-6" type="text" placeholder="" name="price">
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="col-xs-6">Bulk 100</label>
+                        <input class="col-xs-6" type="text" placeholder="" name="discount100">
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="col-xs-6">Bulk 300</label>
+                        <input class="col-xs-6" type="text" placeholder="" name="discount300">
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="col-xs-6">Bulk 500</label>
+                        <input class="col-xs-6" type="text" placeholder="" name="discount500">
+                    </div>
+                    <p>Place token here (Only Admin 1 Can Create)</p>
+                    <input type="text" placeholder="Token" id="tokenCreateForm">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <!-- End Create -->
+            <div class="col-xs-12">
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Update</h4>
+                            </div>
+                            <div class="">
+                                <form id="updateForm">
+                                    <input class="col-xs-6" type="text" placeholder="" name="_id" readonly
+                                        id="_idUpdate" style="display: none;">
+                                    <div class="col-xs-12">
+                                        <label class="col-xs-6">Description</label>
+                                        <p class="col-xs-6" style="padding: 0px;" id="textDescriptionUpdate"></p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="col-xs-6">Default Price</label>
+                                        <input class="col-xs-6" type="text" placeholder="" name="price"
+                                            id="priceUpdate">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="col-xs-6">Bulk 100</label>
+                                        <input class="col-xs-6" type="text" placeholder="" name="discount100"
+                                            id="discount100Update">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="col-xs-6">Bulk 300</label>
+                                        <input class="col-xs-6" type="text" placeholder="" name="discount300"
+                                            id="discount300Update">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="col-xs-6">Bulk 500</label>
+                                        <input class="col-xs-6" type="text" placeholder="" name="discount500"
+                                            id="discount500Update">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p>Place token here (Only Admin 2 Can Update)</p>
+                                        <input type="text" placeholder="Token" id="updateCreateForm">
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="padding: 5px; border-style: solid; margin-top: 10px;">
+            <h4>Read</h4>
+            <table id="table" data-toggle="table" class="table table-bordered" data-url="getFees"
+                data-show-refresh="true" data-sortable="true" data-search="true">
+                <thead>
+                    <tr>
+                        <th data-field="name" data-sortable="true">Name</th>
+                        <th data-field="price" data-sortable="true">Original Price</th>
+                        <th data-field="Bulk_100" data-sortable="true">Bulk_100</th>
+                        <th data-field="Bulk_300" data-sortable="true">Bulk_300</th>
+                        <th data-field="Bulk_500" data-sortable="true">Bulk_500</th>
+                        <th data-formatter="operateFormatter" data-events="operateEvents">Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#textDescription").text($("#deliveryDay option:selected").text() + " " + $("#producttype option:selected").text());
+        $("#nameDescription").val($("#deliveryDay option:selected").text() + " " + $("#producttype option:selected").text());
+
+        $("#display").click(function () {
+            $.ajax({
+                type: "GET",
+                url: "getFees",
+                success: function (result) {
+                    $("#table").bootstrapTable('load', result);
+                },
+                error: function (e) {
+                    alert("ERROR: ", e);
+                    console.log("ERROR: ", e);
+                }
+            });
+        });
+    });
+
+    $("#producttype, #deliveryDay").change(function () {
+        $("#textDescription").text($("#deliveryDay option:selected").text() + " " + $("#producttype option:selected").text());
+        $("#nameDescription").val($("#deliveryDay option:selected").text() + " " + $("#producttype option:selected").text());
+    });
+
+    function operateFormatter() {
+        return [
+            '<a class="edit" href="#" title="Edit" data-toggle="modal" data-target="#myModal">',
+            '<i class="fa fa-edit fa-lg"></i>',
+            '</a>  ',
+            '<a class="remove" href="#" title="Remove">',
+            '<i class="fa fa-trash fa-lg"></i>',
+            '</a>'
+        ].join('')
+    }
+
+    window.operateEvents = {
+        'click .edit': function (e, value, row, index) {
+            console.log(row);
+
+            $("#_idUpdate").val(row._id);
+            $("#textDescriptionUpdate").text(row.name);
+            $("#priceUpdate").val(row.price);
+            $("#discount100Update").val(row.Bulk_100);
+            $("#discount300Update").val(row.Bulk_300);
+            $("#discount500Update").val(row.Bulk_500);
+        },
+        'click .remove': function (e, value, row, index) {
+            $.ajax({
+                type: "DELETE",
+                url: "delete/" + row._id,
+                success: function (result) {
+                    if (result.success) {
+                        alert("Delete Success");
+                    }
+                    else {
+                        alert("Not Found")
+                    }
+
+                    $('#table').bootstrapTable('refresh')
+                },
+                error: function (e) {
+                    alert("ERROR: ", e);
+                    console.log("ERROR: ", e);
+                }
+            });
+        }
+    }
+
+    $("#createTokenForm").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: "/createToken",
+            data: form.serialize(),
+            success: function (data) {
+                $("#displayToken").val(data.accessToken);
+            }
+        });
+
+    });
+
+    $("#createDeliveryPriceForm").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: "/postcreate",
+            data: form.serialize(),
+            headers: {
+                "Authorization": "Bearer " + $('#tokenCreateForm').val()
+            },
+            success: function (result) {
+                if (result.success) {
+                    alert("Create Success");
+                    $('#table').bootstrapTable('refresh')
+                }
+            }
+        });
+    });
+
+    $("#updateForm").submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: "/postUpdate",
+            data: form.serialize(),
+            headers: {
+                "Authorization": "Bearer " + $('#updateCreateForm').val()
+            },
+            success: function (result) {
+                $('#myModal').modal('hide');
+                if (result.success) {
+                    alert("Update Success");
+                    $('#table').bootstrapTable('refresh')
+                }
+            }
+        });
+    });
+</script>
+
+</html>
